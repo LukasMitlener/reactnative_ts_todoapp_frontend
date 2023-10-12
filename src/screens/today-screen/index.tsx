@@ -1,3 +1,4 @@
+import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
 import { Box, Text } from "@/utils/theme"
 import React from "react"
 
@@ -5,9 +6,11 @@ import React from "react"
 const TodayScreen = () => {
 
   return (
-    <Box>
-      <Text>Today</Text>
-    </Box>
+    <SafeAreaWrapper>
+      <Box>
+        <Text>Today</Text>
+      </Box>
+    </SafeAreaWrapper>
   )
 }
 

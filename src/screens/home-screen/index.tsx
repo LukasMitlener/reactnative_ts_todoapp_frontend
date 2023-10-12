@@ -1,15 +1,16 @@
 
+import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
 import { Box, Text } from "@/utils/theme"
 import React from "react"
 
 const HomeScreen = () => {
 
   return (
-      <Box >
-        <Text>
-          Home
-        </Text>
+    <SafeAreaWrapper>
+      <Box>
+        <Text>HomeScreen</Text>
       </Box>
+    </SafeAreaWrapper>
 
   )
 }
