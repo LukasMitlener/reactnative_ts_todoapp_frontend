@@ -8,7 +8,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaWrapper>
       <Box>
-        <Text>HomeScreen</Text>
+        <Text>Home</Text>
       </Box>
     </SafeAreaWrapper>
 
