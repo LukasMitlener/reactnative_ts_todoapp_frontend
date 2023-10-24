@@ -1,6 +1,6 @@
 import axios from "axios"
 import * as SecureStore from "expo-secure-store"
-export const BASE_URL = "http://localhost:1337/"
+export const BASE_URL = "http://10.0.1.15:1337/"
 // export const BASE_URL = "https://production-blossom-app.onrender.com/"
 
 const TIME_OUT = 30000
