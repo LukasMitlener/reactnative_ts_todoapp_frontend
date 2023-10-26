@@ -29,7 +29,8 @@ const SignUpScreen = () => {
 
   const onSubmit = async (data: IUser) => {
     try {
-      const { email, name, password } = data
+      const { email, name, password } = data;
+      console.log('Submitting data:', data); // <-- log
       /**
        * register user
        */
@@ -40,7 +41,8 @@ const SignUpScreen = () => {
       })
       navigateToSignInScreen()
     } catch (error) {
-      console.log('Registration error:', error);
+      console.log('Registration error:', error); // <-- log
+      console.error('Error in onSubmit:', error);
     }
   }
 
