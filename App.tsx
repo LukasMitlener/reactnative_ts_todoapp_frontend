@@ -1,36 +1,54 @@
-import Navigation from '@/navigation';
-import useUserGlobalStore from '@/store/useUserGlobalStore';
-import theme, { Text } from '@/utils/theme';
-import { ThemeProvider } from '@shopify/restyle';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Navigation from "@/navigation"
+import theme from "@/utils/theme"
+import { ThemeProvider } from "@shopify/restyle"
+import { StatusBar } from "expo-status-bar"
+import React from "react"
+import { AppState } from "react-native"
+import { SafeAreaProvider } from "react-native-safe-area-context"
+import { SWRConfig } from "swr"
 
 export default function App() {
-  const { user, updateUser } = useUserGlobalStore()
-
-  console.log("user", JSON.stringify(user, null, 2))
-
-  /* useEffect(() => {
-    updateUser({
-      email: "lukas@gmail.com",
-      name: "lukas"
-    })
-  
-    return () => {
-      
-    }
-  }, []) */
-  
-
   return (
     <ThemeProvider theme={theme}>
       <SafeAreaProvider>
-      <Navigation />
-      <StatusBar translucent />
+        <SWRConfig
+          value={{
+            provider: () => new Map(),
+            isVisible: () => {
+              return true
+            },
+            initFocus(callback) {
+              let appState = AppState.currentState
+
+              const onAppStateChange = (nextAppState: any) => {
+                /* If it's resuming from background or inactive mode to active one */
+                if (
+                  appState.match(/inactive|background/) &&
+                  nextAppState === "active"
+                ) {
+                  callback()
+                }
+                appState = nextAppState
+              }
+
+              // Subscribe to the app state change events
+              const subscription = AppState.addEventListener(
+                "change",
+                onAppStateChange
+              )
+
+              return () => {
+                subscription.remove()
+              }
+            },
+          }}
+        >
+          <Navigation />
+        </SWRConfig>
+        <StatusBar translucent />
       </SafeAreaProvider>
     </ThemeProvider>
-  );
+  )
 }
 
 
